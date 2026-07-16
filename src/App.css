@@ -1,0 +1,350 @@
+/* ============================================================
+   HARU — retro/pixel terminal theme for Robinhood Chain
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap');
+
+:root {
+  --bg:        #e7ecc9;   /* light olive page background   */
+  --card:      #edf0d6;   /* slightly lighter card surface */
+  --lime:      #c3e600;   /* primary accent (chartreuse)   */
+  --lime-deep: #a7c300;   /* darker lime for shadows/hover */
+  --ink:       #171712;   /* near-black                    */
+  --ink-2:     #101008;   /* terminal body black           */
+  --term:      #b9d900;   /* bright terminal text          */
+  --term-dim:  #6f7d1f;   /* dimmed terminal text          */
+  --muted:     #7c8352;   /* muted olive text              */
+  --dot:       #cdd3ab;   /* grid dot color                */
+  --shadow:    #171712;   /* hard drop-shadow color        */
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  /* dotted grid background */
+  background-image: radial-gradient(var(--dot) 1.4px, transparent 1.4px);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: 'Silkscreen', monospace;
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
+}
+
+.app {
+  width: 100%;
+  min-height: 100%;
+  padding: 40px 16px 64px;
+}
+
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* pixel-crisp rendering for all svg icons */
+svg { image-rendering: pixelated; shape-rendering: crispEdges; display: block; }
+
+/* ---------- shared window chrome ---------- */
+.win {
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--shadow);
+  background: var(--card);
+}
+
+.win-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.win-controls svg { width: 15px; height: 15px; }
+
+/* ============================================================
+   TITLE BAR
+   ============================================================ */
+.titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--lime);
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--shadow);
+  padding: 14px 16px;
+}
+.titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+.titlebar-left svg { width: 26px; height: 20px; }
+
+/* ============================================================
+   INTRO
+   ============================================================ */
+.disclaimer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 26px auto 30px;
+  max-width: 620px;
+}
+
+.tags {
+  display: flex;
+  gap: 22px;
+  color: var(--lime-deep);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.hero {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(30px, 7.5vw, 58px);
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 0 0 26px;
+  letter-spacing: 1px;
+}
+
+.built {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--ink);
+  line-height: 2;
+  margin-bottom: 26px;
+}
+
+/* ---------- CTA buttons ---------- */
+.cta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 34px; }
+
+.btn {
+  font-family: 'Silkscreen', monospace;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--shadow);
+  padding: 14px 22px;
+  cursor: pointer;
+  transition: transform .05s ease, box-shadow .05s ease;
+}
+.btn:hover  { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--shadow); }
+.btn:active { transform: translate(5px, 5px); box-shadow: 0 0 0 var(--shadow); }
+.btn-lime { background: var(--lime); color: var(--ink); }
+.btn-dark { background: var(--ink);  color: var(--lime); }
+
+/* ============================================================
+   STEP CARDS
+   ============================================================ */
+.steps { display: flex; flex-direction: column; gap: 26px; margin-bottom: 30px; }
+
+.step {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 6px 18px;
+  padding: 22px 22px 22px 18px;
+  align-items: center;
+}
+
+.step-icon { grid-row: 1 / span 2; align-self: center; justify-self: center; }
+.step-icon svg { width: 74px; height: 74px; }
+
+.step-body { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 560px) {
+  .step { grid-template-columns: 96px 1.05fr 1fr; }
+  .step-body { grid-column: 2; }
+  .step-term { grid-column: 3; align-self: center; }
+}
+
+.step-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 20px;
+  color: var(--ink);
+}
+.step-num { color: var(--lime-deep); }
+
+.step-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin-top: 4px;
+}
+
+/* ---------- terminal windows inside cards ---------- */
+.term { border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--shadow); }
+.term-bar {
+  background: var(--lime);
+  border-bottom: 3px solid var(--ink);
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.term-name {
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+.term-body {
+  background: var(--ink-2);
+  padding: 14px 12px;
+  min-height: 76px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.term-body .t-main { color: var(--term); }
+.term-body .t-dim  { color: var(--term-dim); }
+
+.progress {
+  color: var(--term);
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.progress .bar {
+  background: var(--lime);
+  color: var(--lime);
+  border: 1px solid var(--lime);
+  letter-spacing: -1px;
+  overflow: hidden;
+}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--ink);
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--shadow);
+  margin-bottom: 26px;
+}
+.stat { padding: 16px 18px; border-right: 1px solid #2b2b20; }
+.stat:last-child { border-right: 0; }
+.stat-label { color: var(--muted); font-size: 11px; letter-spacing: 1px; }
+.stat-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 22px;
+  color: var(--lime);
+  margin: 12px 0 12px;
+}
+.stat svg { width: 40px; height: 16px; }
+
+/* ============================================================
+   BANNER + FOOTER
+   ============================================================ */
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--ink);
+  margin-bottom: 30px;
+}
+.banner svg { width: 20px; height: 20px; }
+
+.socials { display: flex; justify-content: center; gap: 20px; }
+.social {
+  width: 42px; height: 42px;
+  border: 3px solid var(--ink);
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform .05s ease;
+}
+.social:hover { transform: translateY(-2px); background: var(--lime); }
+.social svg { width: 18px; height: 18px; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 559px) {
+  .stats { grid-template-columns: 1fr; }
+  .stat { border-right: 0; border-bottom: 1px solid #2b2b20; }
+  .stat:last-child { border-bottom: 0; }
+  .step { grid-template-columns: 64px 1fr; }
+  .step-icon svg { width: 56px; height: 56px; }
+  .hero { font-size: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .social { transition: none; }
+}
+
+/* ============================================================
+   ADDED: interactive buttons + claim view
+   ============================================================ */
+
+/* title bar logo is now a button */
+.titlebar-left {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.titlebar-left:hover { opacity: .85; }
+
+/* window-control glyphs as buttons */
+.win-controls .wc {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  line-height: 0;
+  display: inline-flex;
+}
+.win-controls .wc:hover { opacity: .6; }
+
+/* social buttons (were anchors) */
+.social { border: 3px solid var(--ink); background: var(--bg); }
+
+/* disabled CTA state */
+.btn:disabled {
+  cursor: default;
+  opacity: .7;
+  transform: none;
+  box-shadow: 5px 5px 0 var(--shadow);
+}
+
+/* ---------- claim view ---------- */
+.claim-auth { margin: 6px 0 30px; }
+.claim-auth .term { width: 100%; }
+.claim-auth .term-body { min-height: 96px; padding: 18px 16px; }
+
+.term-line { font-size: 14px; line-height: 1.9; }
+
+.blink { animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .blink { animation: none; } }
+
+/* custom logo image in the title bar */
+.titlebar-logo {
+  height: 26px;
+  width: auto;
+  display: block;
+  image-rendering: pixelated; /* keeps pixel-art logos crisp; harmless otherwise */
+}
