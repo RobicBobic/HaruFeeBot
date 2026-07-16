@@ -343,7 +343,7 @@ svg { image-rendering: pixelated; shape-rendering: crispEdges; display: block; }
 
 /* custom logo image in the title bar */
 .titlebar-logo {
-  height: 26px;
+  height: 80px;
   width: auto;
   display: block;
   image-rendering: pixelated; /* keeps pixel-art logos crisp; harmless otherwise */
