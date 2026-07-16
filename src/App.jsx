@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { usePrivy, useWallets } from "@privy-io/react-auth";
 import "./App.css";
 
 /* ============================================================
@@ -293,33 +292,7 @@ function ClaimUI({
   );
 }
 
-// Real X login via Privy (used only when a Privy App ID is configured).
-function ClaimViewPrivy({ onBack }) {
-  const { ready, authenticated, user, login, logout } = usePrivy();
-  const { wallets } = useWallets();
-
-  const [claim, setClaim] = useState("ready");
-  const [fees] = useState((Math.random() * 0.08 + 0.002).toFixed(4));
-
-  const handle = user?.twitter?.username;
-  const embedded = wallets.find((w) => w.walletClientType === "privy") || wallets[0];
-  const address = embedded?.address || user?.wallet?.address;
-
-  const startClaim = () => {
-    setClaim("claiming");
-    setTimeout(() => setClaim("claimed"), 1200);
-  };
-
-  return (
-    <ClaimUI
-      ready={ready} authenticated={authenticated} handle={handle}
-      address={address} fees={fees} claim={claim}
-      onLogin={login} onClaim={startClaim} onLogout={logout} onBack={onBack}
-    />
-  );
-}
-
-// Simulated login (used when no Privy App ID is set — keeps the site working).
+// Login + claim flow (simulated).
 function ClaimViewMock({ onBack }) {
   const [status, setStatus] = useState("idle"); // idle | authed
   const [claim, setClaim] = useState("ready");
@@ -350,9 +323,9 @@ function ClaimViewMock({ onBack }) {
 /* ============================================================
    APP
    ============================================================ */
-export default function App({ privyEnabled = false }) {
+export default function App() {
   const [view, setView] = useState("home");
-  const ClaimView = privyEnabled ? ClaimViewPrivy : ClaimViewMock;
+  const ClaimView = ClaimViewMock;
 
   return (
     <div className="app">
